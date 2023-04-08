@@ -1,17 +1,69 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// React Element => ReactElement- JS Object =>  HTMLElement(Render)
-const heading = React.createElement("h1", {id: "heading"}, "Namaste React..!!");
-console.log(heading);
+// React Element 
+const heading = (
+    <h1 className="heading" tabIndex="5">
+        Namaste React using JSX..!!
+    </h1>
+);
 
-// JSX - HTML-like or XML-like syntax
-// JSX => Babel transpiled it to React.createElement => ReactElement - JS Object => HTMLElement(render)
+const elem = <span>Hello, </span>; // React element
 
-const jsxHeading = <h1 id="heading" className="heading">Namaste React using JSX..!!</h1>;
-console.log(jsxHeading);
+// React Functional Component
+const Title = () => (
+    <h1 className="heading" tabIndex="5">            
+        {elem}
+        Namaste React using JSX.
+    </h1>
+)
+// const heading = () => {
+//     return <h1>Namaste React Functional Component</h1>
+// };
 
-// JSX (transpiled before it reaches to the JS) -> PARCEL => BABEL
+// Component Composition
+const HeadingComponent = () => (
+    <div id="container">
+        {Title()}
+        <Title />
+        <Title></Title>
+        <h2>Namaste React Functional Component..!!</h2>
+    </div>
+);
+
+// JSX expression must have one parent
+const HeadingComponent2 = () => (
+    <div> 
+        <div id="container">
+        <Title />
+        <h2>Namaste React Functional Component..!!</h2>
+        </div>
+        <div id="container2"></div>
+    </div>
+);
+
+// React Fragement - behaves like an empty tag
+const HeadingComponent3 = () => (
+    <React.Fragment>
+        <div id="container">
+        <Title />
+        <h2>Namaste React Functional Component..!!</h2>
+        </div>
+        <div id="container2"></div>
+    </React.Fragment>
+);
+
+// React Fragement works with empty tag
+const HeadingComponent4 = () => (
+    <>
+        <div id="container">
+        <Title />
+        <h2>Namaste React Functional Component..!!</h2>
+        </div>
+        <div id="container2"></div>
+    </>
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(jsxHeading);
+// root.render(heading); // Render React Element
+root.render(<HeadingComponent />); // Render React Component
